@@ -3,8 +3,6 @@ from sqlalchemy.orm import Session
 from models.user import UserModel
 from serializers.user import (
     UserSchema,
-    UserResponseSchema,
-    UserSignInSchema,
     UserTokenSchema,
 )
 from database import get_db
@@ -12,11 +10,11 @@ from database import get_db
 router = APIRouter()
 
 
-@router.post("/auth/sign-up", response_model=UserResponseSchema)
+@router.post("/sign-up", response_model=UserTokenSchema)
 def create_user(user: UserSchema, db: Session = Depends(get_db)):
     # Check if the username already exists
     existing_user = (
-        db.query(UserModel).filter((UserModel.username == user.username)).first()
+        db.query(UserModel).filter(UserModel.username == user.username).first()
     )
 
     if existing_user:
@@ -30,11 +28,15 @@ def create_user(user: UserSchema, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    return new_user
+    # Generate JWT token
+    token = new_user.generate_token()
+
+    # Return token and a success message
+    return {"token": token, "message": "Sign up successful"}
 
 
-@router.post("/auth/sign-in", response_model=UserTokenSchema)
-def sign_in(user: UserSignInSchema, db: Session = Depends(get_db)):
+@router.post("/sign-in", response_model=UserTokenSchema)
+def sign_in(user: UserSchema, db: Session = Depends(get_db)):
 
     # Find the user by username
     db_user = db.query(UserModel).filter(UserModel.username == user.username).first()

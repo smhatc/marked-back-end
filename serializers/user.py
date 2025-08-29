@@ -1,12 +1,13 @@
 from pydantic import BaseModel
 
 
+# Schema for user sign up
 class UserSchema(BaseModel):
-    username: str  # User's unique name
-    password: str  # Plain text password for user sign up (will be hashed before saving)
+    username: str
+    password: str
 
     class Config:
-        orm_mode = True  # Enables compatibility with ORM models
+        orm_mode = True
 
 
 # Schema for returning user data (without exposing the password)
@@ -19,14 +20,17 @@ class UserResponseSchema(BaseModel):
 
 # Schema for user sign in (captures username and password during sign in)
 class UserSignInSchema(BaseModel):
-    username: str  # Username provided by the user during sign in
-    password: str  # Plain text password provided by the user during sign in
+    username: str
+    password: str
+
+    class Config:
+        orm_mode = True
 
 
-# Schema for the response (containing the JWT token and a success message)
+# Schema for the sign in response (containing the JWT token and a success message)
 class UserTokenSchema(BaseModel):
-    token: str  # JWT token generated upon successful sign in
-    message: str  # Success message
+    token: str
+    message: str
 
     class Config:
         orm_mode = True

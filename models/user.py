@@ -12,11 +12,16 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class UserModel(BaseModel):
 
-    __tablename__ = "users"
+    __tablename__ = "users"  # Table name in the SQL database
 
+    # Data columns specific to this table
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True)
     password_hash = Column(String, nullable=True)
+
+    # Relationships with other tables
+    collections = relationship("CollectionModel", back_populates="user")
+    notes = relationship("NoteModel", back_populates="user")
 
     # Auth methods
     def set_password(self, password: str):

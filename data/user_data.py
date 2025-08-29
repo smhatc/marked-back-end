@@ -1,4 +1,4 @@
-from models.user import UserModel
+from models import UserModel
 
 
 def create_test_users():
@@ -11,4 +11,4 @@ def create_test_users():
     return [user1, user2]
 
 
-user_list = create_test_users()
+users_list = create_test_users()

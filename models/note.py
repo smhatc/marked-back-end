@@ -12,11 +12,11 @@ class NoteModel(BaseModel):
     title = Column(String, nullable=False)
     content = Column(Text, nullable=False)
 
-    # Foreign key linking to the user
-    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-
     # Foreign key linking to the collection (if any)
     collection_id = Column(Integer, ForeignKey("collections.id"), nullable=True)
+
+    # Foreign key linking to the user
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
     # Relationships with other tables
     user = relationship("UserModel", back_populates="notes")

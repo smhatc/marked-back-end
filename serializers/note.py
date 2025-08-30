@@ -3,6 +3,7 @@ from typing import Optional
 
 
 class NoteSchema(BaseModel):
+    id: int
     title: str
     content: str
     collection_id: Optional[int] = Field(default=None)

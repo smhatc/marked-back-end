@@ -4,7 +4,6 @@ from .base import BaseModel
 
 
 class CollectionModel(BaseModel):
-
     __tablename__ = "collections"  # Table name in the SQL database
 
     # Data columns specific to this table

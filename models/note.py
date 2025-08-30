@@ -4,7 +4,6 @@ from .base import BaseModel
 
 
 class NoteModel(BaseModel):
-
     __tablename__ = "notes"  # Table name in the SQL database
 
     # Data columns specific to this table

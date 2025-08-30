@@ -11,7 +11,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class UserModel(BaseModel):
-
     __tablename__ = "users"  # Table name in the SQL database
 
     # Data columns specific to this table

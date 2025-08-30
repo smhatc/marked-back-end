@@ -6,7 +6,6 @@ Base = declarative_base()
 
 
 class BaseModel(Base):
-
     __abstract__ = True  # Prevents this class from being mapped to a database table
 
     id = Column(

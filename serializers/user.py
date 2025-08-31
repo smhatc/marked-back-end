@@ -14,6 +14,7 @@ class UserSchema(BaseModel):
 class UserTokenSchema(BaseModel):
     token: str
     message: str
+    username: str
 
     class Config:
         orm_mode = True

@@ -32,7 +32,11 @@ def create_user(user: UserSchema, db: Session = Depends(get_db)):
     token = new_user.generate_token()
 
     # Return token and a success message
-    return {"token": token, "message": "Sign up successful"}
+    return {
+        "token": token,
+        "message": "Sign up successful",
+        "username": new_user.username,
+    }
 
 
 @router.post("/sign-in", response_model=UserTokenSchema)
@@ -49,4 +53,8 @@ def sign_in(user: UserSchema, db: Session = Depends(get_db)):
     token = db_user.generate_token()
 
     # Return token and a success message
-    return {"token": token, "message": "Sign in successful"}
+    return {
+        "token": token,
+        "message": "Sign in successful",
+        "username": db_user.username,
+    }

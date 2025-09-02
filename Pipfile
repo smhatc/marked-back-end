@@ -13,6 +13,8 @@ passlib = "*"
 bcrypt = "*"
 pyjwt = "*"
 python-dotenv = "*"
+gunicorn = "*"
+uvicorn-worker = "*"
 
 [dev-packages]
 

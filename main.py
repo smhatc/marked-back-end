@@ -1,6 +1,9 @@
-from dotenv import load_dotenv
+import os
 
-load_dotenv()
+if os.getenv("APP_ENV", "development") != "production":
+    from dotenv import load_dotenv
+
+    load_dotenv()
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

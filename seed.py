@@ -6,7 +6,11 @@ from config.environment import db_URI
 from sqlalchemy import create_engine
 from models.base import Base
 
+if db_URI and db_URI.startswith("postgres://"):
+    db_URI = db_URI.replace("postgres://", "postgresql://", 1)
+
 engine = create_engine(db_URI)
+
 SessionLocal = sessionmaker(bind=engine)
 
 try:
